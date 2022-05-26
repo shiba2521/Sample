@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dog
+  - Fox
+  - Human
+  - Food
+  - Bone
+  - Pizza
+  - Apple
+  - Skull
+  - Plane
   layers:
   - Default
   - TransparentFX

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+    
+
 public class PlayerController : MonoBehaviour
 {
-
     public float verticalInput;
     public float horizontalInput;
     public float speed; //character speed
     private Vector3 playerPosition;
     private Rigidbody rigid; //character Rigidbody
     public static bool gameover = false;
+
+    
 
     private void Awake()
     {
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         GetSpeed();
         playerPosition = GetComponent<Transform>().position;
+        
         
     }
 
@@ -43,15 +48,24 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over");
             gameover = true;
             rigid.isKinematic = true;
-            
-            Destroy(other.gameObject);
         }
-        if (other.CompareTag("Food"))
+        if (other.CompareTag("Apple") && gameObject.tag == "Fox")
+        {
+            HitCounter.score += 2;
+        }
+        else if(other.CompareTag("Bone") && gameObject.tag == "Dog")
+        {
+            HitCounter.score += 3;
+        }
+        else if(other.CompareTag("Pizza") && gameObject.tag == "Human")
+        {
+            HitCounter.score += 4;
+        }
+        else
         {
             HitCounter.score++;
-            Destroy(other.gameObject);
         }
-        
+
     }
 
     //Change speed per character
@@ -86,6 +100,8 @@ public class PlayerController : MonoBehaviour
         }
         playerPosition = transform.position; //update character's position
     }
+
+    
 
 
 }

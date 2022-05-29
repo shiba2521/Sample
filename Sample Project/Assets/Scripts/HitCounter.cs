@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System;
+using System.Reflection;
 
 public class HitCounter : MonoBehaviour
 {
@@ -13,20 +15,20 @@ public class HitCounter : MonoBehaviour
     public TextMeshProUGUI gameOver;
     public Button resetGame;
     public Button exitGame;
-    public static int score = 0;
+    public static int score;
     public string userName;
+    
+    private string methodName;
 
-    private void Awake()
-    {
-        
-
-    }
-
-    private int maxPoints;
+    private bool isone = true;
+    
+    
     
     void Start()
     {
+        methodName = "Save" + MenuController.character.tag + "Score";
         
+        score = 0;
         scoreText.text = "Score: " + score;
     }
 
@@ -39,9 +41,11 @@ public class HitCounter : MonoBehaviour
             gameOver.gameObject.SetActive(true);
             resetGame.gameObject.SetActive(true);
             exitGame.gameObject.SetActive(true);
-            if(score > maxPoints)
+            if(score > MenuController.maxPoint && isone)
             {
-                SaveScore();
+                Debug.Log("High Score!");
+                Invoke(methodName, 0f);
+                isone = false;
             }
         }
     }
@@ -62,18 +66,48 @@ public class HitCounter : MonoBehaviour
 #endif 
     }
 
+    
+
     //Save High Score
-    public void SaveScore()
+    public void SaveDogScore()
     {
         SaveData data = new SaveData();
         //PlayerName get high score
-        data.highScoreName[MenuController.character.name] = MenuController.playerName;
+        data.playerName = MenuController.playerName;
         // high score
-        data.highScore[MenuController.character.name] = score;
+        data.playerScore = score;
+        data.characterName = "Dog";
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/savedogfile.json", json);
     }
- 
+
+    public void SaveFoxScore()
+    {
+        SaveData data = new SaveData();
+        //PlayerName get high score
+        data.playerName = MenuController.playerName;
+        // high score
+        data.playerScore = score;
+        data.characterName = "Fox";
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savefoxfile.json", json);
+    }
+
+    public void SaveHumanScore()
+    {
+        SaveData data = new SaveData();
+        //PlayerName get high score
+        data.playerName = MenuController.playerName;
+        // high score
+        data.playerScore = score;
+        data.characterName = "Human";
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savehumanfile.json", json);
+    }
+
+
+
+
 }
 
 

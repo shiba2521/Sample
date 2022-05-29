@@ -348,8 +348,10 @@
 "Assets/Course Library/_Source_Files/Scripts/DestroyAfterDelay.cs"
 "Assets/Scripts/BoundController.cs"
 "Assets/Scripts/DestroyObject.cs"
+"Assets/Scripts/FollowPlayer.cs"
 "Assets/Scripts/HitCounter.cs"
 "Assets/Scripts/MenuController.cs"
+"Assets/Scripts/NewBehaviourScript.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/SpawnManager.cs"
 -langversion:9.0

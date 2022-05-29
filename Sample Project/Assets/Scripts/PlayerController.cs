@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     
     void FixedUpdate()
     {
-        
         verticalInput = Input.GetAxis("Vertical"); //input z direction
         horizontalInput = Input.GetAxis("Horizontal"); //input x direction
         MoveSeeingDirection();
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour
             gameover = true;
             rigid.isKinematic = true;
         }
-        if (other.CompareTag("Apple") && gameObject.tag == "Fox")
+        else if (other.CompareTag("Apple") && gameObject.tag == "Fox")
         {
             HitCounter.score += 2;
         }
@@ -100,10 +99,6 @@ public class PlayerController : MonoBehaviour
         }
         playerPosition = transform.position; //update character's position
     }
-
-    
-
-
 }
 
 /*public class Human : PlayerController
